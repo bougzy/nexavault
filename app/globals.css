@@ -502,3 +502,219 @@
     linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
   min-height: 100vh;
 }
+
+/* ============================================
+   Light Mode — Global Overrides
+   Converts hardcoded dark-theme Tailwind classes
+   to theme-aware values without touching 300+ files.
+   ============================================ */
+
+/* --- Text: text-white → dark text --- */
+.light [class*="text-white"] {
+  color: var(--text-primary) !important;
+}
+/* Restore opacity hierarchy for white text variants */
+.light [class*="text-white/8"],
+.light [class*="text-white/7"] {
+  color: var(--text-secondary) !important;
+}
+.light [class*="text-white/5"],
+.light [class*="text-white/6"] {
+  color: var(--text-muted) !important;
+}
+.light [class*="text-white/1"],
+.light [class*="text-white/2"],
+.light [class*="text-white/3"],
+.light [class*="text-white/4"] {
+  color: var(--text-disabled) !important;
+}
+
+/* --- Text: hardcoded hex light text → dark text --- */
+.light [class*="text-[#F0F4FF]"],
+.light [class*="text-[#f0f4ff]"] {
+  color: var(--text-primary) !important;
+}
+
+/* --- Backgrounds: hardcoded dark hex → CSS variable --- */
+.light [class*="bg-[#050A14]"],
+.light [class*="bg-[#050a14]"] {
+  background-color: var(--bg-primary) !important;
+}
+.light [class*="bg-[#0A1628]"],
+.light [class*="bg-[#0a1628]"] {
+  background-color: var(--bg-secondary) !important;
+}
+.light [class*="bg-[#0F1D32]"],
+.light [class*="bg-[#0f1d32]"] {
+  background-color: var(--bg-tertiary) !important;
+}
+
+/* --- Backgrounds: semi-transparent white → subtle dark tint --- */
+.light [class*="bg-white/5"],
+.light [class*="bg-white/3"],
+.light [class*="bg-white/2"] {
+  background-color: rgba(10, 22, 40, 0.04) !important;
+}
+.light [class*="bg-white/10"],
+.light [class*="bg-white/8"] {
+  background-color: rgba(10, 22, 40, 0.06) !important;
+}
+.light [class*="bg-white/15"],
+.light [class*="bg-white/20"] {
+  background-color: rgba(10, 22, 40, 0.08) !important;
+}
+
+/* --- Gradient from/to overrides --- */
+.light [class*="from-[#050A14]"],
+.light [class*="from-[#050a14]"] {
+  --tw-gradient-from: var(--bg-primary) !important;
+}
+.light [class*="via-[#050A14]"],
+.light [class*="via-[#050a14]"] {
+  --tw-gradient-via: var(--bg-primary) !important;
+}
+.light [class*="via-[#0A1628]"],
+.light [class*="via-[#0a1628]"] {
+  --tw-gradient-via: var(--bg-secondary) !important;
+}
+.light [class*="to-[#0A1628]"],
+.light [class*="to-[#0a1628]"] {
+  --tw-gradient-to: var(--bg-secondary) !important;
+}
+.light [class*="to-[#050A14]"],
+.light [class*="to-[#050a14]"] {
+  --tw-gradient-to: var(--bg-primary) !important;
+}
+
+/* --- Borders: white opacity → theme border --- */
+.light [class*="border-white/"] {
+  border-color: var(--border-default) !important;
+}
+
+/* --- Divide colors --- */
+.light [class*="divide-white/"] > * + * {
+  border-color: var(--border-default) !important;
+}
+
+/* --- Ring colors --- */
+.light [class*="ring-white/"] {
+  --tw-ring-color: var(--border-default) !important;
+}
+
+/* --- Placeholder text --- */
+.light input::placeholder,
+.light textarea::placeholder {
+  color: var(--text-disabled) !important;
+}
+
+/* --- Specific component overrides --- */
+
+/* Navbar glass in light mode */
+.light nav .glass-card {
+  background: rgba(240, 244, 255, 0.85) !important;
+  border-color: var(--border-default) !important;
+}
+
+/* Sidebar drawer */
+.light [style*="--bg-primary"] {
+  background: var(--bg-primary) !important;
+}
+
+/* Toast overrides are inline so they need this */
+.light .go2072408551 {
+  background: rgba(240, 244, 255, 0.95) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-default) !important;
+}
+
+/* Ensure body picks up theme variables */
+.light body,
+body.light {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Glass cards in light mode need stronger background */
+.light .glass-card,
+.light .glass-card-static,
+.light .glass-card-elevated,
+.light .glass-card-glow {
+  background: var(--glass-bg) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+
+/* Cyan text should darken slightly in light mode for contrast */
+.light [class*="text-cyan-400"] {
+  color: #0094B3 !important;
+}
+.light [class*="text-cyan-300"] {
+  color: #0094B3 !important;
+}
+
+/* Violet/purple text */
+.light [class*="text-violet-400"] {
+  color: #6B4E97 !important;
+}
+
+/* Ensure gradient text stays visible */
+.light .text-gradient-primary {
+  background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* Input/select backgrounds */
+.light input[type="text"],
+.light input[type="email"],
+.light input[type="password"],
+.light input[type="number"],
+.light input[type="tel"],
+.light textarea,
+.light select {
+  background: rgba(255, 255, 255, 0.8) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-default) !important;
+}
+.light input:focus,
+.light textarea:focus,
+.light select:focus {
+  border-color: var(--border-active) !important;
+}
+
+/* Select option elements */
+.light option {
+  background: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Buttons with white/10 bg */
+.light [class*="hover:bg-white"] {
+  transition: background-color 0.15s ease;
+}
+
+/* Red/danger text should stay red */
+.light [class*="text-red-"] {
+  color: inherit;
+}
+
+/* Green/success text should stay green */
+.light [class*="text-green-"],
+.light [class*="text-emerald-"] {
+  color: inherit;
+}
+
+/* Yellow/warning text should stay yellow */
+.light [class*="text-yellow-"],
+.light [class*="text-amber-"] {
+  color: inherit;
+}
+
+/* Gradient buttons (cyan→violet) should keep their colors */
+.light [class*="from-cyan"][class*="to-violet"] {
+  color: white !important;
+}
+.light [class*="from-cyan"][class*="to-violet"] * {
+  color: white !important;
+}

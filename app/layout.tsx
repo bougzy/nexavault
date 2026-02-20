@@ -33,7 +33,7 @@ export default async function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="font-dm-sans bg-[#050A14] text-white min-h-screen antialiased">
+      <body className="font-dm-sans min-h-screen antialiased">
         <ThemeProvider>
           <Navbar initialUser={initialUser} />
           <main className="min-h-screen">{children}</main>
