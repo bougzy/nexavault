@@ -1,0 +1,10 @@
+{
+  "nav": { "dashboard": "لوحة التحكم", "donate": "تبرع", "grants": "المنح", "faq": "الأسئلة الشائعة", "about": "حول", "signIn": "تسجيل الدخول", "getStarted": "ابدأ الآن", "signOut": "تسجيل الخروج" },
+  "hero": { "title": "خدمات مصرفية بلا حدود", "subtitle": "آمن. ذكي. سلس. اكتشف الجيل الجديد من الخدمات المصرفية الرقمية.", "cta": "ابدأ الآن", "signIn": "تسجيل الدخول" },
+  "dashboard": { "welcome": "مرحباً بعودتك", "balance": "الرصيد الحالي", "adminManaged": "تم تحديث الرصيد بواسطة المسؤول", "deposit": "إيداع", "withdraw": "سحب", "actionDisabled": "يتطلب هذا الإجراء إذن المسؤول.", "accountNumber": "رقم الحساب", "memberSince": "عضو منذ", "lastLogin": "آخر تسجيل دخول", "transactions": "سجل المعاملات", "noTransactions": "لا توجد معاملات بعد." },
+  "auth": { "register": "إنشاء حساب", "login": "تسجيل الدخول", "verifyOtp": "تحقق من هويتك", "otpSubtitle": "أدخل رمز OTP المكون من 6 أرقام", "fullName": "الاسم الكامل", "email": "البريد الإلكتروني", "phone": "رقم الهاتف", "address": "العنوان", "password": "كلمة المرور", "confirmPassword": "تأكيد كلمة المرور", "rememberMe": "تذكرني", "forgotPassword": "نسيت كلمة المرور؟", "noAccount": "ليس لديك حساب؟", "hasAccount": "لديك حساب بالفعل؟" },
+  "chat": { "title": "مساعد الدعم", "online": "متصل", "greeting": "مرحباً! كيف يمكننا مساعدتك اليوم؟", "placeholder": "اكتب رسالة...", "ended": "تم إنهاء هذه المحادثة بسبب عدم النشاط.", "restart": "إعادة تشغيل المحادثة" },
+  "donate": { "title": "كرمك يغير حياة الناس", "walletTitle": "عنوان محفظة التبرعات", "copyAddress": "نسخ العنوان", "copied": "تم النسخ!", "formTitle": "سجل تبرعك", "submit": "إرسال سجل التبرع" },
+  "grants": { "title": "منح تفتح الأبواب", "subtitle": "استكشف فرص التمويل المتاحة", "learnMore": "اعرف المزيد", "applyTitle": "مستعد للتقديم؟", "contactAdmin": "تواصل مع المسؤول" },
+  "footer": { "description": "منصة مصرفية رقمية من الجيل القادم.", "quickLinks": "روابط سريعة", "legal": "قانوني", "newsletter": "ابق على اطلاع", "copyright": "جميع الحقوق محفوظة." }
+}

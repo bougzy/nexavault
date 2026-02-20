@@ -1,0 +1,77 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "donate": "Donate",
+    "grants": "Grants",
+    "faq": "FAQ",
+    "about": "About",
+    "signIn": "Sign In",
+    "getStarted": "Get Started",
+    "signOut": "Sign Out"
+  },
+  "hero": {
+    "title": "Banking Without Boundaries",
+    "subtitle": "Secure. Smart. Seamless. Experience next-generation digital banking with real-time balance management and global grant opportunities.",
+    "cta": "Get Started",
+    "signIn": "Sign In"
+  },
+  "dashboard": {
+    "welcome": "Welcome back",
+    "balance": "Current Balance",
+    "adminManaged": "Balance Updated by Admin",
+    "deposit": "Deposit",
+    "withdraw": "Withdraw",
+    "actionDisabled": "This action requires admin authorization. Please contact support via the chat assistant below.",
+    "accountNumber": "Account Number",
+    "memberSince": "Member Since",
+    "lastLogin": "Last Login",
+    "transactions": "Transaction History",
+    "noTransactions": "No transactions yet. Your admin will update your balance."
+  },
+  "auth": {
+    "register": "Create Account",
+    "login": "Sign In",
+    "verifyOtp": "Verify Your Identity",
+    "otpSubtitle": "Enter the 6-digit OTP generated for your account",
+    "fullName": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "address": "Address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot Password?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?"
+  },
+  "chat": {
+    "title": "Support Assistant",
+    "online": "Online",
+    "greeting": "Hello! How can we help you today?",
+    "placeholder": "Type a message...",
+    "ended": "This conversation has been marked as ended due to inactivity.",
+    "restart": "Restart Conversation"
+  },
+  "donate": {
+    "title": "Your Generosity Changes Lives",
+    "walletTitle": "Donation Wallet Address",
+    "copyAddress": "Copy Address",
+    "copied": "Copied!",
+    "formTitle": "Log Your Donation",
+    "submit": "Submit Donation Record"
+  },
+  "grants": {
+    "title": "Grants That Open Doors",
+    "subtitle": "Explore our comprehensive range of funding opportunities",
+    "learnMore": "Learn More",
+    "applyTitle": "Ready to Apply?",
+    "contactAdmin": "Contact Admin via Chat"
+  },
+  "footer": {
+    "description": "Next-generation digital banking platform. Secure, smart, and seamless financial management for everyone.",
+    "quickLinks": "Quick Links",
+    "legal": "Legal",
+    "newsletter": "Stay Updated",
+    "copyright": "All rights reserved."
+  }
+}

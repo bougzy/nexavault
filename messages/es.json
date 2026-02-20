@@ -1,0 +1,77 @@
+{
+  "nav": {
+    "dashboard": "Panel",
+    "donate": "Donar",
+    "grants": "Subvenciones",
+    "faq": "FAQ",
+    "about": "Acerca de",
+    "signIn": "Iniciar sesion",
+    "getStarted": "Comenzar",
+    "signOut": "Cerrar sesion"
+  },
+  "hero": {
+    "title": "Banca sin fronteras",
+    "subtitle": "Seguro. Inteligente. Sin interrupciones. Experimenta la banca digital de nueva generacion con gestion de saldos en tiempo real y oportunidades globales de subvenciones.",
+    "cta": "Comenzar",
+    "signIn": "Iniciar sesion"
+  },
+  "dashboard": {
+    "welcome": "Bienvenido de vuelta",
+    "balance": "Saldo actual",
+    "adminManaged": "Saldo actualizado por el administrador",
+    "deposit": "Depositar",
+    "withdraw": "Retirar",
+    "actionDisabled": "Esta accion requiere autorizacion del administrador. Contacta al soporte a traves del asistente de chat.",
+    "accountNumber": "Numero de cuenta",
+    "memberSince": "Miembro desde",
+    "lastLogin": "Ultimo acceso",
+    "transactions": "Historial de transacciones",
+    "noTransactions": "Sin transacciones aun. Tu administrador actualizara tu saldo."
+  },
+  "auth": {
+    "register": "Crear cuenta",
+    "login": "Iniciar sesion",
+    "verifyOtp": "Verifica tu identidad",
+    "otpSubtitle": "Ingresa el codigo OTP de 6 digitos generado para tu cuenta",
+    "fullName": "Nombre completo",
+    "email": "Correo electronico",
+    "phone": "Numero de telefono",
+    "address": "Direccion",
+    "password": "Contrasena",
+    "confirmPassword": "Confirmar contrasena",
+    "rememberMe": "Recordarme",
+    "forgotPassword": "Olvidaste tu contrasena?",
+    "noAccount": "No tienes una cuenta?",
+    "hasAccount": "Ya tienes una cuenta?"
+  },
+  "chat": {
+    "title": "Asistente de soporte",
+    "online": "En linea",
+    "greeting": "Hola! Como podemos ayudarte hoy?",
+    "placeholder": "Escribe un mensaje...",
+    "ended": "Esta conversacion ha sido marcada como terminada por inactividad.",
+    "restart": "Reiniciar conversacion"
+  },
+  "donate": {
+    "title": "Tu generosidad cambia vidas",
+    "walletTitle": "Direccion de billetera de donaciones",
+    "copyAddress": "Copiar direccion",
+    "copied": "Copiado!",
+    "formTitle": "Registrar tu donacion",
+    "submit": "Enviar registro de donacion"
+  },
+  "grants": {
+    "title": "Subvenciones que abren puertas",
+    "subtitle": "Explora nuestra amplia gama de oportunidades de financiamiento",
+    "learnMore": "Mas informacion",
+    "applyTitle": "Listo para aplicar?",
+    "contactAdmin": "Contactar al administrador por chat"
+  },
+  "footer": {
+    "description": "Plataforma bancaria digital de nueva generacion. Gestion financiera segura, inteligente y fluida para todos.",
+    "quickLinks": "Enlaces rapidos",
+    "legal": "Legal",
+    "newsletter": "Mantente actualizado",
+    "copyright": "Todos los derechos reservados."
+  }
+}

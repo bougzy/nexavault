@@ -1,0 +1,77 @@
+{
+  "nav": {
+    "dashboard": "Tableau de bord",
+    "donate": "Faire un don",
+    "grants": "Subventions",
+    "faq": "FAQ",
+    "about": "A propos",
+    "signIn": "Connexion",
+    "getStarted": "Commencer",
+    "signOut": "Deconnexion"
+  },
+  "hero": {
+    "title": "La banque sans frontieres",
+    "subtitle": "Securise. Intelligent. Fluide. Decouvrez la banque numerique de nouvelle generation avec la gestion de solde en temps reel et des opportunites de subventions mondiales.",
+    "cta": "Commencer",
+    "signIn": "Connexion"
+  },
+  "dashboard": {
+    "welcome": "Bon retour",
+    "balance": "Solde actuel",
+    "adminManaged": "Solde mis a jour par l'administrateur",
+    "deposit": "Deposer",
+    "withdraw": "Retirer",
+    "actionDisabled": "Cette action necessite l'autorisation de l'administrateur. Veuillez contacter le support via l'assistant de chat ci-dessous.",
+    "accountNumber": "Numero de compte",
+    "memberSince": "Membre depuis",
+    "lastLogin": "Derniere connexion",
+    "transactions": "Historique des transactions",
+    "noTransactions": "Aucune transaction pour le moment. Votre administrateur mettra a jour votre solde."
+  },
+  "auth": {
+    "register": "Creer un compte",
+    "login": "Connexion",
+    "verifyOtp": "Verifiez votre identite",
+    "otpSubtitle": "Entrez le code OTP a 6 chiffres genere pour votre compte",
+    "fullName": "Nom complet",
+    "email": "Adresse e-mail",
+    "phone": "Numero de telephone",
+    "address": "Adresse",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "rememberMe": "Se souvenir de moi",
+    "forgotPassword": "Mot de passe oublie?",
+    "noAccount": "Vous n'avez pas de compte?",
+    "hasAccount": "Vous avez deja un compte?"
+  },
+  "chat": {
+    "title": "Assistant Support",
+    "online": "En ligne",
+    "greeting": "Bonjour! Comment pouvons-nous vous aider aujourd'hui?",
+    "placeholder": "Tapez un message...",
+    "ended": "Cette conversation a ete marquee comme terminee en raison d'inactivite.",
+    "restart": "Redemarrer la conversation"
+  },
+  "donate": {
+    "title": "Votre generosite change des vies",
+    "walletTitle": "Adresse du portefeuille de dons",
+    "copyAddress": "Copier l'adresse",
+    "copied": "Copie!",
+    "formTitle": "Enregistrer votre don",
+    "submit": "Soumettre le don"
+  },
+  "grants": {
+    "title": "Des subventions qui ouvrent des portes",
+    "subtitle": "Explorez notre gamme complete d'opportunites de financement",
+    "learnMore": "En savoir plus",
+    "applyTitle": "Pret a postuler?",
+    "contactAdmin": "Contacter l'administrateur par chat"
+  },
+  "footer": {
+    "description": "Plateforme bancaire numerique de nouvelle generation. Gestion financiere securisee, intelligente et fluide pour tous.",
+    "quickLinks": "Liens rapides",
+    "legal": "Mentions legales",
+    "newsletter": "Restez informe",
+    "copyright": "Tous droits reserves."
+  }
+}

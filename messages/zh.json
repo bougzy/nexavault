@@ -1,0 +1,10 @@
+{
+  "nav": { "dashboard": "仪表盘", "donate": "捐赠", "grants": "资助", "faq": "常见问题", "about": "关于我们", "signIn": "登录", "getStarted": "开始使用", "signOut": "退出" },
+  "hero": { "title": "无界银行", "subtitle": "安全、智能、无缝。体验新一代数字银行服务。", "cta": "开始使用", "signIn": "登录" },
+  "dashboard": { "welcome": "欢迎回来", "balance": "当前余额", "adminManaged": "余额已由管理员更新", "deposit": "存款", "withdraw": "取款", "actionDisabled": "此操作需要管理员授权。", "accountNumber": "账户号码", "memberSince": "注册时间", "lastLogin": "上次登录", "transactions": "交易记录", "noTransactions": "暂无交易记录。" },
+  "auth": { "register": "创建账户", "login": "登录", "verifyOtp": "验证身份", "otpSubtitle": "输入6位数OTP验证码", "fullName": "全名", "email": "电子邮件", "phone": "电话号码", "address": "地址", "password": "密码", "confirmPassword": "确认密码", "rememberMe": "记住我", "forgotPassword": "忘记密码？", "noAccount": "没有账户？", "hasAccount": "已有账户？" },
+  "chat": { "title": "客服助手", "online": "在线", "greeting": "你好！今天我们能帮你什么？", "placeholder": "输入消息...", "ended": "由于不活动，此对话已结束。", "restart": "重新开始对话" },
+  "donate": { "title": "您的慷慨改变生活", "walletTitle": "捐赠钱包地址", "copyAddress": "复制地址", "copied": "已复制！", "formTitle": "记录您的捐赠", "submit": "提交捐赠记录" },
+  "grants": { "title": "打开机会之门的资助", "subtitle": "探索我们全面的资助机会", "learnMore": "了解更多", "applyTitle": "准备申请？", "contactAdmin": "通过聊天联系管理员" },
+  "footer": { "description": "新一代数字银行平台。", "quickLinks": "快速链接", "legal": "法律", "newsletter": "保持更新", "copyright": "版权所有。" }
+}
