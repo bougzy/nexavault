@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import {
   Heart, Copy, Check, Wallet, Bitcoin, CircleDollarSign,
@@ -63,29 +63,32 @@ export default function DonatePage() {
     setLoading(false);
   };
 
+  const heroSection = useMemo(() => (
+    <section className="relative py-16 px-4 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-violet-600/10 to-transparent" />
+      <div className="absolute top-20 left-1/4 w-64 h-64 bg-violet-500/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-1/4 w-48 h-48 bg-cyan-500/10 rounded-full blur-3xl" />
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="relative max-w-4xl mx-auto text-center"
+      >
+        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500 to-violet-500 flex items-center justify-center mx-auto mb-6">
+          <Heart className="w-8 h-8 text-white" />
+        </div>
+        <h1 className="text-4xl md:text-5xl font-sora font-bold text-white mb-4">
+          Your Generosity <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-violet-400">Changes Lives</span>
+        </h1>
+        <p className="text-lg text-white/50 max-w-2xl mx-auto">
+          Every contribution makes a meaningful impact. Support causes that matter and help build a better future for communities worldwide.
+        </p>
+      </motion.div>
+    </section>
+  ), []);
+
   return (
     <div className="min-h-screen pt-20 pb-12">
-      {/* Hero */}
-      <section className="relative py-16 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-violet-600/10 to-transparent" />
-        <div className="absolute top-20 left-1/4 w-64 h-64 bg-violet-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-48 h-48 bg-cyan-500/10 rounded-full blur-3xl" />
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="relative max-w-4xl mx-auto text-center"
-        >
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500 to-violet-500 flex items-center justify-center mx-auto mb-6">
-            <Heart className="w-8 h-8 text-white" />
-          </div>
-          <h1 className="text-4xl md:text-5xl font-sora font-bold text-white mb-4">
-            Your Generosity <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-violet-400">Changes Lives</span>
-          </h1>
-          <p className="text-lg text-white/50 max-w-2xl mx-auto">
-            Every contribution makes a meaningful impact. Support causes that matter and help build a better future for communities worldwide.
-          </p>
-        </motion.div>
-      </section>
+      {heroSection}
 
       {/* Content */}
       <section className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-8">

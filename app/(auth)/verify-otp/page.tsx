@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback, Suspense } from 'react';
+import { useState, useEffect, useRef, useCallback, Suspense, memo, useMemo } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -16,8 +16,8 @@ import {
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
-/* ─── floating particle ─── */
-function Particle({
+/* ─── floating particle (memoized) ─── */
+const Particle = memo(function Particle({
   delay,
   x,
   y,
@@ -45,7 +45,7 @@ function Particle({
       }}
     />
   );
-}
+});
 
 /* ─── main OTP content (uses useSearchParams) ─── */
 function VerifyOtpContent() {
@@ -221,9 +221,8 @@ function VerifyOtpContent() {
 
   const timerPercent = (timeLeft / 600) * 100;
 
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-[#050A14] relative overflow-hidden px-4">
-      {/* Background particles */}
+  const backgroundEffects = useMemo(() => (
+    <>
       <Particle delay={0} x="10%" y="20%" size={4} />
       <Particle delay={1} x="85%" y="15%" size={3} />
       <Particle delay={2} x="20%" y="75%" size={5} />
@@ -232,12 +231,16 @@ function VerifyOtpContent() {
       <Particle delay={1.5} x="90%" y="50%" size={3} />
       <Particle delay={2.5} x="5%" y="55%" size={4} />
       <Particle delay={4} x="40%" y="90%" size={3} />
-
-      {/* Radial glow */}
       <div className="absolute inset-0">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#00D4FF]/[0.03] blur-[100px]" />
         <div className="absolute top-1/3 left-1/3 w-[400px] h-[400px] rounded-full bg-[#7B5EA7]/[0.04] blur-[80px]" />
       </div>
+    </>
+  ), []);
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-[#050A14] relative overflow-hidden px-4">
+      {backgroundEffects}
 
       {/* Main card */}
       <motion.div

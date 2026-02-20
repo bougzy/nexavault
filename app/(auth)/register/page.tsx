@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, memo, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -55,8 +55,8 @@ function getPasswordStrength(password: string) {
   return { label: 'Strong', color: '#22C55E', width: '100%' };
 }
 
-/* ─── floating shape ─── */
-function FloatingShape({
+/* ─── floating shape (memoized) ─── */
+const FloatingShape = memo(function FloatingShape({
   delay,
   size,
   x,
@@ -94,7 +94,7 @@ function FloatingShape({
       }}
     />
   );
-}
+});
 
 /* ═══════════════════════════════════════════
    REGISTER PAGE
@@ -228,6 +228,70 @@ export default function RegisterPage() {
 
   const inputBase =
     'w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-3 text-[#F0F4FF] font-dm-sans placeholder:text-[rgba(240,244,255,0.3)] focus:outline-none focus:border-[#00D4FF]/50 focus:ring-1 focus:ring-[#00D4FF]/25 transition-all duration-300';
+
+  const decorativePanel = useMemo(() => (
+    <div className="hidden lg:flex w-1/2 relative items-center justify-center overflow-hidden">
+      <div className="absolute inset-0">
+        <motion.div
+          className="absolute inset-0"
+          animate={{
+            background: [
+              'radial-gradient(circle at 30% 40%, rgba(0,212,255,0.15), transparent 60%), radial-gradient(circle at 70% 60%, rgba(123,94,167,0.15), transparent 60%)',
+              'radial-gradient(circle at 60% 30%, rgba(123,94,167,0.15), transparent 60%), radial-gradient(circle at 40% 70%, rgba(0,212,255,0.15), transparent 60%)',
+              'radial-gradient(circle at 30% 40%, rgba(0,212,255,0.15), transparent 60%), radial-gradient(circle at 70% 60%, rgba(123,94,167,0.15), transparent 60%)',
+            ],
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+        />
+      </div>
+      <FloatingShape delay={0} size={200} x="15%" y="20%" color="rgba(0,212,255,0.08)" />
+      <FloatingShape delay={2} size={150} x="60%" y="60%" color="rgba(123,94,167,0.1)" />
+      <FloatingShape delay={4} size={120} x="75%" y="15%" color="rgba(255,215,0,0.06)" />
+      <FloatingShape delay={1} size={180} x="30%" y="70%" color="rgba(0,212,255,0.06)" />
+      <FloatingShape delay={3} size={100} x="50%" y="35%" color="rgba(123,94,167,0.08)" />
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
+        }}
+      />
+      <div className="relative z-10 text-center px-12">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+        >
+          <motion.div
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+            className="inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-gradient-to-br from-[#00D4FF]/10 to-[#7B5EA7]/10 border border-[#00D4FF]/20 mb-8"
+          >
+            <Shield className="w-12 h-12 text-[#00D4FF]" />
+          </motion.div>
+          <h2 className="text-3xl font-sora font-bold text-[#F0F4FF] mb-4">Bank-Grade Security</h2>
+          <p className="text-[rgba(240,244,255,0.55)] font-dm-sans max-w-sm mx-auto leading-relaxed">
+            Your financial data is protected with state-of-the-art encryption and multi-factor authentication.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3 mt-8">
+            {['256-bit Encryption', 'Biometric Auth', 'Real-time Alerts'].map((feat, i) => (
+              <motion.div
+                key={feat}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8 + i * 0.15 }}
+                className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] text-sm text-[rgba(240,244,255,0.7)] font-dm-sans"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-[#FFD700]" />
+                {feat}
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  ), []);
 
   return (
     <div className="min-h-screen flex bg-[#050A14] overflow-hidden">
@@ -552,83 +616,8 @@ export default function RegisterPage() {
         </motion.div>
       </div>
 
-      {/* ── RIGHT: Decorative panel ── */}
-      <div className="hidden lg:flex w-1/2 relative items-center justify-center overflow-hidden">
-        {/* Animated gradient background */}
-        <div className="absolute inset-0">
-          <motion.div
-            className="absolute inset-0"
-            animate={{
-              background: [
-                'radial-gradient(circle at 30% 40%, rgba(0,212,255,0.15), transparent 60%), radial-gradient(circle at 70% 60%, rgba(123,94,167,0.15), transparent 60%)',
-                'radial-gradient(circle at 60% 30%, rgba(123,94,167,0.15), transparent 60%), radial-gradient(circle at 40% 70%, rgba(0,212,255,0.15), transparent 60%)',
-                'radial-gradient(circle at 30% 40%, rgba(0,212,255,0.15), transparent 60%), radial-gradient(circle at 70% 60%, rgba(123,94,167,0.15), transparent 60%)',
-              ],
-            }}
-            transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-          />
-        </div>
-
-        {/* Floating shapes */}
-        <FloatingShape delay={0} size={200} x="15%" y="20%" color="rgba(0,212,255,0.08)" />
-        <FloatingShape delay={2} size={150} x="60%" y="60%" color="rgba(123,94,167,0.1)" />
-        <FloatingShape delay={4} size={120} x="75%" y="15%" color="rgba(255,215,0,0.06)" />
-        <FloatingShape delay={1} size={180} x="30%" y="70%" color="rgba(0,212,255,0.06)" />
-        <FloatingShape delay={3} size={100} x="50%" y="35%" color="rgba(123,94,167,0.08)" />
-
-        {/* Grid pattern overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
-            backgroundSize: '60px 60px',
-          }}
-        />
-
-        {/* Content */}
-        <div className="relative z-10 text-center px-12">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-          >
-            <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-              className="inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-gradient-to-br from-[#00D4FF]/10 to-[#7B5EA7]/10 border border-[#00D4FF]/20 mb-8"
-            >
-              <Shield className="w-12 h-12 text-[#00D4FF]" />
-            </motion.div>
-
-            <h2 className="text-3xl font-sora font-bold text-[#F0F4FF] mb-4">
-              Bank-Grade Security
-            </h2>
-            <p className="text-[rgba(240,244,255,0.55)] font-dm-sans max-w-sm mx-auto leading-relaxed">
-              Your financial data is protected with state-of-the-art encryption and
-              multi-factor authentication.
-            </p>
-
-            {/* Feature pills */}
-            <div className="flex flex-wrap justify-center gap-3 mt-8">
-              {['256-bit Encryption', 'Biometric Auth', 'Real-time Alerts'].map(
-                (feat, i) => (
-                  <motion.div
-                    key={feat}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.8 + i * 0.15 }}
-                    className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] text-sm text-[rgba(240,244,255,0.7)] font-dm-sans"
-                  >
-                    <Sparkles className="w-3.5 h-3.5 text-[#FFD700]" />
-                    {feat}
-                  </motion.div>
-                )
-              )}
-            </div>
-          </motion.div>
-        </div>
-      </div>
+      {/* ── RIGHT: Decorative panel (memoized) ── */}
+      {decorativePanel}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, memo, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -16,8 +16,8 @@ import {
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
-/* ─── floating currency symbol ─── */
-function FloatingCurrency({
+/* ─── floating currency symbol (memoized to avoid re-render on typing) ─── */
+const FloatingCurrency = memo(function FloatingCurrency({
   symbol,
   x,
   y,
@@ -57,7 +57,7 @@ function FloatingCurrency({
       {symbol}
     </motion.span>
   );
-}
+});
 
 /* ═══════════════════════════════════════════
    LOGIN PAGE
@@ -135,27 +135,28 @@ export default function LoginPage() {
   const inputBase =
     'w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-3.5 text-[#F0F4FF] font-dm-sans placeholder:text-[rgba(240,244,255,0.3)] focus:outline-none focus:border-[#00D4FF]/50 focus:ring-1 focus:ring-[#00D4FF]/25 transition-all duration-300';
 
-  const currencies = [
-    { symbol: '$', x: '8%', y: '12%', delay: 0, duration: 14, fontSize: 48 },
-    { symbol: '€', x: '82%', y: '8%', delay: 1.5, duration: 12, fontSize: 40 },
-    { symbol: '£', x: '15%', y: '75%', delay: 3, duration: 16, fontSize: 36 },
-    { symbol: '¥', x: '88%', y: '70%', delay: 0.8, duration: 13, fontSize: 44 },
-    { symbol: '₿', x: '45%', y: '5%', delay: 2.2, duration: 15, fontSize: 32 },
-    { symbol: '₹', x: '70%', y: '85%', delay: 4, duration: 11, fontSize: 38 },
-    { symbol: '₩', x: '25%', y: '90%', delay: 1, duration: 14, fontSize: 34 },
-    { symbol: '₣', x: '92%', y: '40%', delay: 2.8, duration: 12, fontSize: 30 },
-    { symbol: 'Ξ', x: '5%', y: '45%', delay: 3.5, duration: 13, fontSize: 36 },
-    { symbol: '₮', x: '55%', y: '92%', delay: 0.5, duration: 15, fontSize: 28 },
-    { symbol: '฿', x: '35%', y: '15%', delay: 4.5, duration: 14, fontSize: 32 },
-    { symbol: '₴', x: '75%', y: '30%', delay: 2, duration: 11, fontSize: 30 },
-  ];
+  const floatingCurrencies = useMemo(() => {
+    const currencies = [
+      { symbol: '$', x: '8%', y: '12%', delay: 0, duration: 14, fontSize: 48 },
+      { symbol: '€', x: '82%', y: '8%', delay: 1.5, duration: 12, fontSize: 40 },
+      { symbol: '£', x: '15%', y: '75%', delay: 3, duration: 16, fontSize: 36 },
+      { symbol: '¥', x: '88%', y: '70%', delay: 0.8, duration: 13, fontSize: 44 },
+      { symbol: '₿', x: '45%', y: '5%', delay: 2.2, duration: 15, fontSize: 32 },
+      { symbol: '₹', x: '70%', y: '85%', delay: 4, duration: 11, fontSize: 38 },
+      { symbol: '₩', x: '25%', y: '90%', delay: 1, duration: 14, fontSize: 34 },
+      { symbol: '₣', x: '92%', y: '40%', delay: 2.8, duration: 12, fontSize: 30 },
+      { symbol: 'Ξ', x: '5%', y: '45%', delay: 3.5, duration: 13, fontSize: 36 },
+      { symbol: '₮', x: '55%', y: '92%', delay: 0.5, duration: 15, fontSize: 28 },
+      { symbol: '฿', x: '35%', y: '15%', delay: 4.5, duration: 14, fontSize: 32 },
+      { symbol: '₴', x: '75%', y: '30%', delay: 2, duration: 11, fontSize: 30 },
+    ];
+    return currencies.map((c, i) => <FloatingCurrency key={i} {...c} />);
+  }, []);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#050A14] relative overflow-hidden px-4">
       {/* Floating currency symbols */}
-      {currencies.map((c, i) => (
-        <FloatingCurrency key={i} {...c} />
-      ))}
+      {floatingCurrencies}
 
       {/* Background glow */}
       <div className="absolute inset-0 pointer-events-none">
