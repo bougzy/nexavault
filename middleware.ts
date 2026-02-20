@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const publicPaths = ['/', '/login', '/register', '/verify-otp', '/faq', '/about', '/grants'];
+const publicPaths = ['/', '/login', '/register', '/verify-otp', '/faq', '/about', '/grants', '/donate'];
 const adminPaths = ['/admin'];
-const userPaths = ['/dashboard', '/donate'];
+const userPaths = ['/dashboard'];
 
 interface TokenPayload {
   userId: string;
