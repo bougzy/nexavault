@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback, Suspense, memo, useMemo } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   ShieldCheck,
   KeyRound,
@@ -11,8 +11,6 @@ import {
   CheckCircle2,
   AlertCircle,
   Copy,
-  Eye,
-  EyeOff,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -58,7 +56,6 @@ function VerifyOtpContent() {
   const [loading, setLoading] = useState(false);
   const [shake, setShake] = useState(false);
   const [verified, setVerified] = useState(false);
-  const [showOtp, setShowOtp] = useState(false);
   const [timeLeft, setTimeLeft] = useState(600); // 10 minutes
   const [canResend, setCanResend] = useState(false);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
@@ -302,61 +299,45 @@ function VerifyOtpContent() {
 
           {!verified && (
             <>
-              {/* Demo OTP reveal box */}
-              <div className="mb-6 rounded-xl bg-gradient-to-r from-[#FFD700]/[0.06] to-[#FFD700]/[0.02] border border-[#FFD700]/20 p-4">
-                <div className="flex items-center justify-between mb-2">
+              {/* OTP code box — visible by default */}
+              <div className="mb-6 rounded-xl bg-gradient-to-r from-[#FFD700]/[0.08] to-[#FFD700]/[0.03] border border-[#FFD700]/25 p-5">
+                <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
                     <KeyRound className="w-4 h-4 text-[#FFD700]" />
-                    <span className="text-xs font-dm-sans text-[#FFD700]/80 uppercase tracking-wider">
-                      Your Generated OTP
+                    <span className="text-xs font-dm-sans text-[#FFD700]/80 uppercase tracking-wider font-semibold">
+                      Your Verification Code
                     </span>
                   </div>
-                  <div className="flex items-center gap-1">
-                    <button
-                      onClick={() => setShowOtp((v) => !v)}
-                      className="p-1 rounded-md hover:bg-[rgba(255,255,255,0.05)] text-[#FFD700]/60 hover:text-[#FFD700] transition-colors"
-                    >
-                      {showOtp ? (
-                        <EyeOff className="w-3.5 h-3.5" />
-                      ) : (
-                        <Eye className="w-3.5 h-3.5" />
-                      )}
-                    </button>
-                    <button
-                      onClick={copyOtp}
-                      className="p-1 rounded-md hover:bg-[rgba(255,255,255,0.05)] text-[#FFD700]/60 hover:text-[#FFD700] transition-colors"
-                    >
-                      <Copy className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
                 </div>
-                <div className="text-center">
-                  <AnimatePresence mode="wait">
-                    {showOtp ? (
-                      <motion.p
-                        key="visible"
-                        initial={{ opacity: 0, y: 5 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -5 }}
-                        className="text-2xl font-mono font-bold tracking-[0.3em] text-[#FFD700]"
-                      >
-                        {formattedOtp}
-                      </motion.p>
-                    ) : (
-                      <motion.p
-                        key="hidden"
-                        initial={{ opacity: 0, y: 5 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -5 }}
-                        className="text-2xl font-mono font-bold tracking-[0.3em] text-[#FFD700]/50"
-                      >
-                        ***-***
-                      </motion.p>
-                    )}
-                  </AnimatePresence>
-                  <p className="text-[10px] text-[#FFD700]/40 font-dm-sans mt-1">
-                    Demo mode — OTP displayed for testing
+                <div className="text-center mb-4">
+                  <p className="text-3xl font-mono font-bold tracking-[0.4em] text-[#FFD700]">
+                    {formattedOtp}
                   </p>
+                </div>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => {
+                      // Auto-fill: split the OTP into digits and fill the inputs
+                      const digits = generatedOtp.split('');
+                      const newOtp = [...otp];
+                      digits.forEach((d, i) => {
+                        if (i < 6) newOtp[i] = d;
+                      });
+                      setOtp(newOtp);
+                      inputRefs.current[5]?.focus();
+                    }}
+                    className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg bg-[#FFD700]/15 border border-[#FFD700]/25 text-sm font-semibold text-[#FFD700] hover:bg-[#FFD700]/25 transition-colors"
+                  >
+                    <ShieldCheck className="w-4 h-4" />
+                    Auto-Fill Code
+                  </button>
+                  <button
+                    onClick={copyOtp}
+                    className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 text-sm text-white/60 hover:text-[#FFD700] hover:border-[#FFD700]/25 transition-colors"
+                  >
+                    <Copy className="w-4 h-4" />
+                    Copy
+                  </button>
                 </div>
               </div>
 

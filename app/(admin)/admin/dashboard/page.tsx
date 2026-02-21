@@ -26,14 +26,6 @@ interface UserData {
   createdAt: string;
 }
 
-interface StatCard {
-  label: string;
-  value: string | number;
-  icon: React.ReactNode;
-  change?: string;
-  trend?: 'up' | 'down';
-}
-
 /* ═══════════════════════════════════════════
    ADMIN DASHBOARD PAGE
    ═══════════════════════════════════════════ */
@@ -82,34 +74,50 @@ export default function AdminDashboardPage() {
   const totalBalance = users.reduce((sum, u) => sum + (u.balance || 0), 0);
   const activeAccounts = users.filter((u) => u.status === 'active').length;
 
-  const stats: StatCard[] = [
+  const stats = [
     {
       label: 'Total Users',
       value: totalUsers.toLocaleString(),
       icon: <Users className="w-6 h-6" />,
       change: '+12%',
-      trend: 'up',
+      trend: 'up' as const,
+      color: '#00D4FF',
+      bgColor: 'rgba(0,212,255,0.1)',
+      borderColor: 'rgba(0,212,255,0.2)',
+      glowColor: 'rgba(0,212,255,0.06)',
     },
     {
       label: 'Total Balance',
       value: `$${totalBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
       icon: <Wallet className="w-6 h-6" />,
       change: '+8.2%',
-      trend: 'up',
+      trend: 'up' as const,
+      color: '#00E676',
+      bgColor: 'rgba(0,230,118,0.1)',
+      borderColor: 'rgba(0,230,118,0.2)',
+      glowColor: 'rgba(0,230,118,0.06)',
     },
     {
       label: 'New Messages',
       value: unreadMessages,
       icon: <MessageSquare className="w-6 h-6" />,
       change: unreadMessages > 0 ? `${unreadMessages} unread` : 'All read',
-      trend: unreadMessages > 0 ? 'up' : 'down',
+      trend: (unreadMessages > 0 ? 'up' : 'down') as 'up' | 'down',
+      color: '#A78BFA',
+      bgColor: 'rgba(167,139,250,0.1)',
+      borderColor: 'rgba(167,139,250,0.2)',
+      glowColor: 'rgba(167,139,250,0.06)',
     },
     {
       label: 'Active Accounts',
       value: activeAccounts.toLocaleString(),
       icon: <ShieldCheck className="w-6 h-6" />,
       change: `${totalUsers > 0 ? Math.round((activeAccounts / totalUsers) * 100) : 0}%`,
-      trend: 'up',
+      trend: 'up' as const,
+      color: '#FFB800',
+      bgColor: 'rgba(255,184,0,0.1)',
+      borderColor: 'rgba(255,184,0,0.2)',
+      glowColor: 'rgba(255,184,0,0.06)',
     },
   ];
 
@@ -145,7 +153,7 @@ export default function AdminDashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#050A14] p-6 md:p-8">
+    <div className="min-h-screen bg-[#050A14] px-6 pb-6 pt-20 md:px-8 md:pb-8 md:pt-24">
       {/* Background effects */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-0 right-1/4 w-[600px] h-[600px] rounded-full bg-[#00D4FF]/[0.02] blur-[120px]" />
@@ -191,31 +199,46 @@ export default function AdminDashboardPage() {
               key={stat.label}
               variants={item}
               whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 group hover:border-[#00D4FF]/30 transition-all duration-300"
+              className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 group transition-all duration-300 overflow-hidden"
+              style={{ borderColor: `${stat.color}15` }}
             >
-              <div className="flex items-start justify-between mb-4">
-                <div className="w-12 h-12 rounded-xl bg-[#00D4FF]/10 border border-[#00D4FF]/20 flex items-center justify-center text-[#00D4FF] group-hover:bg-[#00D4FF]/15 transition-colors">
-                  {stat.icon}
-                </div>
-                {stat.change && (
-                  <div className={`flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-lg ${
-                    stat.trend === 'up'
-                      ? 'text-emerald-400 bg-emerald-400/10'
-                      : 'text-white/40 bg-white/5'
-                  }`}>
-                    {stat.trend === 'up' ? (
-                      <ArrowUpRight className="w-3 h-3" />
-                    ) : (
-                      <ArrowDownRight className="w-3 h-3" />
-                    )}
-                    {stat.change}
+              {/* Subtle glow effect behind card */}
+              <div
+                className="absolute -top-12 -right-12 w-32 h-32 rounded-full blur-3xl opacity-30 group-hover:opacity-50 transition-opacity"
+                style={{ background: stat.glowColor }}
+              />
+              <div className="relative z-10">
+                <div className="flex items-start justify-between mb-4">
+                  <div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center transition-colors"
+                    style={{
+                      background: stat.bgColor,
+                      border: `1px solid ${stat.borderColor}`,
+                      color: stat.color,
+                    }}
+                  >
+                    {stat.icon}
                   </div>
-                )}
+                  {stat.change && (
+                    <div className={`flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-lg ${
+                      stat.trend === 'up'
+                        ? 'text-emerald-400 bg-emerald-400/10'
+                        : 'text-white/40 bg-white/5'
+                    }`}>
+                      {stat.trend === 'up' ? (
+                        <ArrowUpRight className="w-3 h-3" />
+                      ) : (
+                        <ArrowDownRight className="w-3 h-3" />
+                      )}
+                      {stat.change}
+                    </div>
+                  )}
+                </div>
+                <p className="text-2xl font-sora font-bold text-white mb-1">
+                  {stat.value}
+                </p>
+                <p className="text-sm text-white/40">{stat.label}</p>
               </div>
-              <p className="text-2xl font-sora font-bold text-white mb-1">
-                {stat.value}
-              </p>
-              <p className="text-sm text-white/40">{stat.label}</p>
             </motion.div>
           ))}
         </motion.div>

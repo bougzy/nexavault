@@ -194,9 +194,7 @@ export default function DashboardPage() {
   };
 
   /* ─── Chat / Messages ─── */
-  const scrollToMessages = useCallback(() => {
-    setTimeout(() => messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }), 50);
-  }, []);
+  const prevMsgCount = useRef(0);
 
   const fetchMessages = useCallback(async () => {
     try {
@@ -204,7 +202,14 @@ export default function DashboardPage() {
       if (res.ok) {
         const data = await res.json();
         if (data.messages) {
-          setChatMessages(data.messages.filter((m: {senderRole: string}) => m.senderRole === 'user' || m.senderRole === 'admin'));
+          const filtered = data.messages.filter((m: {senderRole: string}) => m.senderRole === 'user' || m.senderRole === 'admin');
+          setChatMessages(prev => {
+            // Only update state if data actually changed — prevents re-render + scroll reset
+            if (prev.length === filtered.length && prev[prev.length - 1]?._id === filtered[filtered.length - 1]?._id) {
+              return prev;
+            }
+            return filtered;
+          });
         }
       }
     } catch {} finally { setChatLoading(false); }
@@ -232,7 +237,13 @@ export default function DashboardPage() {
     return () => clearInterval(interval);
   }, [fetchMessages]);
 
-  useEffect(scrollToMessages, [chatMessages, scrollToMessages]);
+  // Only auto-scroll within the messages container when NEW messages arrive (not on every poll)
+  useEffect(() => {
+    if (chatMessages.length > prevMsgCount.current) {
+      setTimeout(() => messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+    }
+    prevMsgCount.current = chatMessages.length;
+  }, [chatMessages]);
 
   /* Current date display */
   const today = new Date().toLocaleDateString('en-US', {
@@ -256,7 +267,7 @@ export default function DashboardPage() {
         />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24">
         <motion.div
           variants={containerVariants}
           initial="hidden"
