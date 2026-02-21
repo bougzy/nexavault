@@ -159,6 +159,12 @@
     transition: color var(--transition-fast);
   }
 
+  /* Prevent iOS auto-zoom on input focus (requires >= 16px) */
+  input, textarea, select {
+    font-size: 16px;
+    touch-action: manipulation;
+  }
+
   a:hover {
     color: var(--primary-hover);
   }

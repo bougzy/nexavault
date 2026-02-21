@@ -133,7 +133,7 @@ export default function LoginPage() {
   };
 
   const inputBase =
-    'w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-3.5 text-[#F0F4FF] font-dm-sans placeholder:text-[rgba(240,244,255,0.3)] focus:outline-none focus:border-[#00D4FF]/50 focus:ring-1 focus:ring-[#00D4FF]/25 transition-all duration-300';
+    'w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-3.5 text-base text-[#F0F4FF] font-dm-sans placeholder:text-[rgba(240,244,255,0.3)] focus:outline-none focus:border-[#00D4FF]/50 focus:ring-1 focus:ring-[#00D4FF]/25 transition-colors';
 
   const floatingCurrencies = useMemo(() => {
     const currencies = [
@@ -241,6 +241,7 @@ export default function LoginPage() {
                 <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[rgba(240,244,255,0.35)]" />
                 <input
                   type="email"
+                  inputMode="email"
                   value={email}
                   onChange={(e) => {
                     setEmail(e.target.value);
@@ -249,6 +250,8 @@ export default function LoginPage() {
                   placeholder="john@example.com"
                   className={`${inputBase} pl-10`}
                   autoComplete="email"
+                  autoCapitalize="none"
+                  enterKeyHint="next"
                 />
               </div>
             </div>
@@ -278,6 +281,8 @@ export default function LoginPage() {
                   placeholder="Enter your password"
                   className={`${inputBase} pl-10 pr-10`}
                   autoComplete="current-password"
+                  autoCapitalize="none"
+                  enterKeyHint="go"
                 />
                 <button
                   type="button"

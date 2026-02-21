@@ -379,7 +379,7 @@ function VerifyOtpContent() {
                       value={digit}
                       onChange={(e) => handleChange(i, e.target.value)}
                       onKeyDown={(e) => handleKeyDown(i, e)}
-                      className={`w-12 h-14 text-center text-xl font-mono font-bold rounded-xl border-2 bg-[rgba(255,255,255,0.04)] text-[#F0F4FF] focus:outline-none transition-all duration-300 ${
+                      className={`w-12 h-14 text-center text-xl font-mono font-bold rounded-xl border-2 bg-[rgba(255,255,255,0.04)] text-[#F0F4FF] focus:outline-none transition-colors ${
                         digit
                           ? 'border-[#00D4FF]/50 shadow-[0_0_15px_rgba(0,212,255,0.15)]'
                           : 'border-[rgba(255,255,255,0.1)] focus:border-[#00D4FF]/40'

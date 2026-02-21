@@ -167,8 +167,11 @@ export default function DonatePage() {
                 <input
                   value={form.name}
                   onChange={e => setForm({ ...form, name: e.target.value })}
-                  className="w-full mt-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-cyan-500/50"
+                  className="w-full mt-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-base text-white placeholder:text-white/20 focus:outline-none focus:border-cyan-500/50"
                   placeholder="John Doe"
+                  autoComplete="name"
+                  autoCapitalize="words"
+                  enterKeyHint="next"
                 />
               </div>
 
@@ -176,10 +179,14 @@ export default function DonatePage() {
                 <label className="text-xs text-white/40 uppercase tracking-wider">Email Address *</label>
                 <input
                   type="email"
+                  inputMode="email"
                   value={form.email}
                   onChange={e => setForm({ ...form, email: e.target.value })}
-                  className="w-full mt-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-cyan-500/50"
+                  className="w-full mt-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-base text-white placeholder:text-white/20 focus:outline-none focus:border-cyan-500/50"
                   placeholder="john@example.com"
+                  autoComplete="email"
+                  autoCapitalize="none"
+                  enterKeyHint="next"
                 />
               </div>
 
@@ -188,7 +195,7 @@ export default function DonatePage() {
                 <select
                   value={form.category}
                   onChange={e => setForm({ ...form, category: e.target.value })}
-                  className="w-full mt-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-cyan-500/50"
+                  className="w-full mt-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-base text-white focus:outline-none focus:border-cyan-500/50"
                 >
                   {categories.map(c => (
                     <option key={c} value={c} className="bg-gray-900">{c}</option>
@@ -200,12 +207,18 @@ export default function DonatePage() {
                 <div>
                   <label className="text-xs text-white/40 uppercase tracking-wider">Amount *</label>
                   <input
-                    type="number"
-                    step="0.01"
+                    type="text"
+                    inputMode="decimal"
                     value={form.amount}
-                    onChange={e => setForm({ ...form, amount: e.target.value })}
-                    className="w-full mt-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-cyan-500/50"
+                    onChange={e => {
+                      const val = e.target.value;
+                      if (val === '' || /^\d*\.?\d*$/.test(val)) {
+                        setForm({ ...form, amount: val });
+                      }
+                    }}
+                    className="w-full mt-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-base text-white placeholder:text-white/20 focus:outline-none focus:border-cyan-500/50"
                     placeholder="0.00"
+                    enterKeyHint="next"
                   />
                 </div>
                 <div>
@@ -213,7 +226,7 @@ export default function DonatePage() {
                   <select
                     value={form.currency}
                     onChange={e => setForm({ ...form, currency: e.target.value })}
-                    className="w-full mt-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-cyan-500/50"
+                    className="w-full mt-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-base text-white focus:outline-none focus:border-cyan-500/50"
                   >
                     {currencies.map(c => (
                       <option key={c} value={c} className="bg-gray-900">{c}</option>
@@ -227,8 +240,11 @@ export default function DonatePage() {
                 <input
                   value={form.txHash}
                   onChange={e => setForm({ ...form, txHash: e.target.value })}
-                  className="w-full mt-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white font-mono placeholder:text-white/20 focus:outline-none focus:border-cyan-500/50"
+                  className="w-full mt-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-base text-white font-mono placeholder:text-white/20 focus:outline-none focus:border-cyan-500/50"
                   placeholder="0x..."
+                  autoCapitalize="none"
+                  autoComplete="off"
+                  enterKeyHint="next"
                 />
               </div>
 
@@ -238,8 +254,9 @@ export default function DonatePage() {
                   value={form.note}
                   onChange={e => setForm({ ...form, note: e.target.value })}
                   rows={3}
-                  className="w-full mt-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-cyan-500/50 resize-none"
+                  className="w-full mt-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-base text-white placeholder:text-white/20 focus:outline-none focus:border-cyan-500/50 resize-none"
                   placeholder="Leave a note..."
+                  enterKeyHint="done"
                 />
               </div>
 

@@ -96,6 +96,38 @@ const FloatingShape = memo(function FloatingShape({
   );
 });
 
+/* ─── input wrapper (stable reference — defined outside component to prevent focus loss) ─── */
+function InputWrapper({
+  children,
+  label,
+  error,
+}: {
+  children: React.ReactNode;
+  label: string;
+  error?: string;
+}) {
+  return (
+    <div className="space-y-1.5">
+      <label className="block text-sm font-dm-sans text-[rgba(240,244,255,0.55)]">
+        {label}
+      </label>
+      {children}
+      <AnimatePresence>
+        {error && (
+          <motion.p
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            className="text-xs text-red-400 font-dm-sans"
+          >
+            {error}
+          </motion.p>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 /* ═══════════════════════════════════════════
    REGISTER PAGE
    ═══════════════════════════════════════════ */
@@ -196,38 +228,8 @@ export default function RegisterPage() {
     }
   };
 
-  /* ─── input wrapper ─── */
-  const InputWrapper = ({
-    children,
-    label,
-    error,
-  }: {
-    children: React.ReactNode;
-    label: string;
-    error?: string;
-  }) => (
-    <div className="space-y-1.5">
-      <label className="block text-sm font-dm-sans text-[rgba(240,244,255,0.55)]">
-        {label}
-      </label>
-      {children}
-      <AnimatePresence>
-        {error && (
-          <motion.p
-            initial={{ opacity: 0, y: -4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
-            className="text-xs text-red-400 font-dm-sans"
-          >
-            {error}
-          </motion.p>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-
   const inputBase =
-    'w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-3 text-[#F0F4FF] font-dm-sans placeholder:text-[rgba(240,244,255,0.3)] focus:outline-none focus:border-[#00D4FF]/50 focus:ring-1 focus:ring-[#00D4FF]/25 transition-all duration-300';
+    'w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-3 text-base text-[#F0F4FF] font-dm-sans placeholder:text-[rgba(240,244,255,0.3)] focus:outline-none focus:border-[#00D4FF]/50 focus:ring-1 focus:ring-[#00D4FF]/25 transition-colors';
 
   const decorativePanel = useMemo(() => (
     <div className="hidden lg:flex w-1/2 relative items-center justify-center overflow-hidden">
@@ -337,6 +339,9 @@ export default function RegisterPage() {
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="John Doe"
                     className={`${inputBase} pl-10`}
+                    autoComplete="name"
+                    autoCapitalize="words"
+                    enterKeyHint="next"
                   />
                 </div>
               </InputWrapper>
@@ -352,7 +357,7 @@ export default function RegisterPage() {
                         e.stopPropagation();
                         setShowCountryDropdown((v) => !v);
                       }}
-                      className="flex items-center gap-1.5 bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] rounded-xl px-3 py-3 text-[#F0F4FF] text-sm font-dm-sans hover:border-[#00D4FF]/30 transition-all duration-300 min-w-[90px]"
+                      className="flex items-center gap-1.5 bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] rounded-xl px-3 py-3 text-[#F0F4FF] text-base font-dm-sans hover:border-[#00D4FF]/30 transition-colors min-w-[90px]"
                     >
                       <span>
                         {countryCodes.find((c) => c.code === countryCode)
@@ -394,12 +399,15 @@ export default function RegisterPage() {
                     <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[rgba(240,244,255,0.35)]" />
                     <input
                       type="tel"
+                      inputMode="tel"
                       value={phone}
                       onChange={(e) =>
                         setPhone(e.target.value.replace(/[^0-9\s]/g, ''))
                       }
                       placeholder="123 456 7890"
                       className={`${inputBase} pl-10`}
+                      autoComplete="tel-national"
+                      enterKeyHint="next"
                     />
                   </div>
                 </div>
@@ -411,10 +419,14 @@ export default function RegisterPage() {
                   <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[rgba(240,244,255,0.35)]" />
                   <input
                     type="email"
+                    inputMode="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="john@example.com"
                     className={`${inputBase} pl-10`}
+                    autoComplete="email"
+                    autoCapitalize="none"
+                    enterKeyHint="next"
                   />
                 </div>
               </InputWrapper>
@@ -429,6 +441,8 @@ export default function RegisterPage() {
                     onChange={(e) => setAddress(e.target.value)}
                     placeholder="123 Main St, City, Country"
                     className={`${inputBase} pl-10`}
+                    autoComplete="street-address"
+                    enterKeyHint="next"
                   />
                 </div>
               </InputWrapper>
@@ -443,6 +457,9 @@ export default function RegisterPage() {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Min. 8 characters"
                     className={`${inputBase} pl-10 pr-10`}
+                    autoComplete="new-password"
+                    autoCapitalize="none"
+                    enterKeyHint="next"
                   />
                   <button
                     type="button"
@@ -497,6 +514,9 @@ export default function RegisterPage() {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="Re-enter password"
                     className={`${inputBase} pl-10 pr-16`}
+                    autoComplete="new-password"
+                    autoCapitalize="none"
+                    enterKeyHint="done"
                   />
                   <div className="absolute right-3.5 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
                     {passwordsMatch && (
