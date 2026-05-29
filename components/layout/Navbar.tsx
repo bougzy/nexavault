@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Sun, Moon, Bell, Globe, User, LogOut, Menu, X,
   LayoutDashboard, Heart, Award, HelpCircle, Info, Shield,
-  ChevronRight,
+  ChevronRight, KeyRound,
 } from 'lucide-react';
 import { useTheme } from '@/components/shared/ThemeProvider';
 
@@ -87,6 +87,7 @@ export default function Navbar({ initialUser }: NavbarProps) {
     ? [
         { href: '/admin/dashboard', label: 'Overview', icon: LayoutDashboard },
         { href: '/admin/users', label: 'Users', icon: User },
+        { href: '/admin/recovery', label: 'Recovery', icon: KeyRound },
         { href: '/admin/messages', label: 'Messages', icon: Bell },
         { href: '/admin/donations', label: 'Donations', icon: Heart },
         { href: '/admin/wallet', label: 'Wallet', icon: Shield },

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const publicPaths = ['/', '/login', '/register', '/verify-otp', '/faq', '/about', '/grants', '/donate'];
+const publicPaths = ['/', '/login', '/register', '/verify-otp', '/forgot-password', '/faq', '/about', '/grants', '/donate'];
 const adminPaths = ['/admin'];
 const userPaths = ['/dashboard'];
 
